@@ -326,6 +326,13 @@ tbody tr:nth-child(even) { background: #f6fafd; }
   cursor: pointer;
   min-width: 0;
   transition: background 0.1s ease;
+  position: relative;
+  outline-offset: -2px;
+}
+.cell:focus-visible {
+  outline: 3px solid var(--white);
+  box-shadow: 0 0 0 3px var(--blue-500);
+  z-index: 2;
 }
 
 .grid .label {

@@ -104,7 +104,8 @@
     playerShots: null,   // Set of enemy cells already fired at
     enemyShots: null,    // Set of player cells AI already fired at
     turn: 'player',
-    over: false
+    over: false,
+    focusedCell: null    // Currently keyboard-focused cell index on enemy board
   };
 
   var enemyBoardEl = document.getElementById('enemy-board');
@@ -119,21 +120,31 @@
   function buildBoard(container, isEnemy) {
     container.innerHTML = '';
     container.classList.add('grid');
-    if (isEnemy) container.classList.add('enemy-board');
+    if (isEnemy) {
+      container.classList.add('enemy-board');
+      container.setAttribute('role', 'grid');
+      container.setAttribute('aria-label', 'Enemy waters — use arrow keys to navigate, Enter or Space to fire');
+    } else {
+      container.setAttribute('role', 'grid');
+      container.setAttribute('aria-label', 'Your fleet — display only');
+    }
 
     var corner = document.createElement('div');
     corner.className = 'label';
+    corner.setAttribute('role', 'columnheader');
     container.appendChild(corner);
     for (var c = 1; c <= BOARD_SIZE; c++) {
       var colLabel = document.createElement('div');
       colLabel.className = 'label';
       colLabel.textContent = c;
+      colLabel.setAttribute('role', 'columnheader');
       container.appendChild(colLabel);
     }
     for (var r = 0; r < BOARD_SIZE; r++) {
       var rowLabel = document.createElement('div');
       rowLabel.className = 'label';
       rowLabel.textContent = String.fromCharCode(65 + r);
+      rowLabel.setAttribute('role', 'rowheader');
       container.appendChild(rowLabel);
       for (var col = 0; col < BOARD_SIZE; col++) {
         (function (idx) {
@@ -141,7 +152,10 @@
           cell.type = 'button';
           cell.className = 'cell';
           cell.dataset.index = idx;
-          cell.setAttribute('aria-label', 'Fire at ' + coordLabel(idx));
+          cell.setAttribute('role', 'gridcell');
+          cell.setAttribute('aria-rowindex', r + 1);
+          cell.setAttribute('aria-colindex', c + 1);
+          cell.setAttribute('aria-label', coordLabel(idx) + (isEnemy ? ' — click or press Enter to fire' : ' — your ship'));
           if (isEnemy) {
             cell.addEventListener('click', function () { playerFire(idx); });
           } else {
@@ -291,6 +305,85 @@
     setStatus(playerWon ? 'You win!' : 'You lose.');
     log(playerWon ? 'Battle over — victory!' : 'Battle over — defeat.');
   }
+
+  // Keyboard navigation for the enemy board (arrow keys + Enter/Space)
+  enemyBoardEl.addEventListener('keydown', function (e) {
+    var key = e.key;
+    var isArrow = key === 'ArrowUp' || key === 'ArrowDown' || key === 'ArrowLeft' || key === 'ArrowRight';
+    var isFire = key === 'Enter' || key === ' ';
+
+    if (!isArrow && !isFire) return;
+    if (state.over || state.turn !== 'player') return;
+
+    var cells = enemyBoardEl.querySelectorAll('button.cell:not([disabled])');
+    if (!cells.length) return;
+
+    // Determine current focused index
+    var currentIdx = state.focusedCell != null ? state.focusedCell : 0;
+    var currentCell = cellAt(enemyBoardEl, currentIdx);
+    if (!currentCell || currentCell.disabled) {
+      currentIdx = parseInt(cells[0].dataset.index, 10);
+      currentCell = cells[0];
+    }
+
+    if (isFire) {
+      e.preventDefault();
+      playerFire(currentIdx);
+      return;
+    }
+
+    // Arrow key navigation
+    e.preventDefault();
+    var row = Math.floor(currentIdx / BOARD_SIZE);
+    var col = currentIdx % BOARD_SIZE;
+    var newRow = row, newCol = col;
+
+    if (key === 'ArrowUp') newRow = Math.max(0, row - 1);
+    else if (key === 'ArrowDown') newRow = Math.min(BOARD_SIZE - 1, row + 1);
+    else if (key === 'ArrowLeft') newCol = Math.max(0, col - 1);
+    else if (key === 'ArrowRight') newCol = Math.min(BOARD_SIZE - 1, col + 1);
+
+    var newIdx = newRow * BOARD_SIZE + newCol;
+    var newCell = cellAt(enemyBoardEl, newIdx);
+
+    // Skip disabled (already-fired) cells
+    if (newCell && newCell.disabled) {
+      // Try to find nearest non-disabled cell in the same direction
+      var candidates = Array.from(cells).filter(function (c) {
+        var ci = parseInt(c.dataset.index, 10);
+        var cr = Math.floor(ci / BOARD_SIZE);
+        var cc = ci % BOARD_SIZE;
+        if (key === 'ArrowUp' && cr < row && cc === col) return true;
+        if (key === 'ArrowDown' && cr > row && cc === col) return true;
+        if (key === 'ArrowLeft' && cc < col && cr === row) return true;
+        if (key === 'ArrowRight' && cc > col && cr === row) return true;
+        return false;
+      });
+      if (candidates.length) {
+        // Pick the closest one
+        candidates.sort(function (a, b) {
+          var ai = parseInt(a.dataset.index, 10);
+          var bi = parseInt(b.dataset.index, 10);
+          return Math.abs(ai - currentIdx) - Math.abs(bi - currentIdx);
+        });
+        newIdx = parseInt(candidates[0].dataset.index, 10);
+        newCell = candidates[0];
+      }
+    }
+
+    if (newCell && !newCell.disabled) {
+      state.focusedCell = newIdx;
+      newCell.focus();
+    }
+  });
+
+  // Update focused cell on mouse click (so keyboard and mouse stay in sync)
+  enemyBoardEl.addEventListener('click', function (e) {
+    var cell = e.target.closest('button.cell');
+    if (cell && !cell.disabled) {
+      state.focusedCell = parseInt(cell.dataset.index, 10);
+    }
+  });
 
   document.getElementById('new-game-btn').addEventListener('click', newGame);
   newGame();
