@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Play Battleships — Free Online Game vs AI | Battleships Online</title>
+  <meta name="description" content="Play Battleships online against the AI. Click to fire, sink all five enemy ships before the computer sinks yours. Free, instant, no sign-up.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M12 38h40l-6 10H18z" fill="#2b86d9"/><rect x="28" y="20" width="8" height="14" fill="#2b86d9"/><rect x="22" y="26" width="20" height="8" fill="#1e6fb8"/></svg>
+        Battleships Online
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">☰ Menu</button>
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="game.html" aria-current="page">Play Game</a></li>
+          <li><a href="how-to-play.html">How to Play</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="container">
+      <h1 class="page-title">Battle Station</h1>
+      <p class="page-subtitle">You fire first. Click any square on the enemy waters — then brace for return fire.</p>
+
+      <div id="game-over-banner" class="game-over-banner" hidden>
+        <p id="game-over-text"></p>
+        <button class="btn" id="new-game-btn-2" type="button">Play Again</button>
+      </div>
+
+      <div class="game-layout">
+        <section class="boards" aria-label="Game boards">
+          <div class="board-panel">
+            <h2>Enemy Waters <span class="visually-hidden">(click a square to fire)</span></h2>
+            <div id="enemy-board"></div>
+          </div>
+          <div class="board-panel">
+            <h2>Your Fleet</h2>
+            <div id="player-board"></div>
+          </div>
+        </section>
+
+        <aside class="game-status" aria-label="Battle status">
+          <p id="status-message" aria-live="polite"></p>
+          <h3 style="margin:0 0 0.4rem; font-size:0.95rem;">Your fleet</h3>
+          <ul id="player-fleet-status" class="fleet-status"></ul>
+          <h3 style="margin:0 0 0.4rem; font-size:0.95rem;">Enemy fleet</h3>
+          <ul id="enemy-fleet-status" class="fleet-status"></ul>
+          <h3 style="margin:0 0 0.4rem; font-size:0.95rem;">Battle log</h3>
+          <div id="battle-log" class="log" aria-live="polite"></div>
+          <div class="game-actions">
+            <button class="btn" id="new-game-btn" type="button">New Game</button>
+          </div>
+        </aside>
+      </div>
+
+      <section aria-labelledby="game-help">
+        <h2 class="section-title" id="game-help">Quick Tips</h2>
+        <ul>
+          <li>Red squares are hits, grey circles are misses. A dark red square means that ship is sunk.</li>
+          <li>Ships never touch diagonally or overlap — every ship occupies a straight line of its exact size.</li>
+          <li>Once you score a hit, the ship must be somewhere in line with that square. Work outward from it.</li>
+          <li>Need the full rules? Read the <a href="how-to-play.html">How to Play guide</a>.</li>
+        </ul>
+      </section>
+
+      <!--
+        AD SLOT #2 (game page)
+        Paste your AdSense ad unit code here after approval. See README.md for placement guidance.
+      -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span class="js-current-year">2026</span> Battleships Online. All rights reserved.</p>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/game.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // "Play Again" button inside the game-over banner reuses the main New Game handler.
+    (function () {
+      var bannerBtn = document.getElementById('new-game-btn-2');
+      var mainBtn = document.getElementById('new-game-btn');
+      bannerBtn.addEventListener('click', function () { mainBtn.click(); });
+    })();
+  </script>
+</body>
+</html>

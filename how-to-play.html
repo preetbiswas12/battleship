@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Play Battleships — Rules &amp; Strategy | Battleships Online</title>
+  <meta name="description" content="Learn how to play Battleships: the fleet, the rules, and proven strategies like the parity search and the kill shot pattern. A two-minute guide for new commanders.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M12 38h40l-6 10H18z" fill="#2b86d9"/><rect x="28" y="20" width="8" height="14" fill="#2b86d9"/><rect x="22" y="26" width="20" height="8" fill="#1e6fb8"/></svg>
+        Battleships Online
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">☰ Menu</button>
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="game.html">Play Game</a></li>
+          <li><a href="how-to-play.html" aria-current="page">How to Play</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="container legal">
+      <h1 class="page-title">How to Play Battleships</h1>
+      <p class="page-subtitle">Everything a new commander needs to know — the board, the fleet, the rules, and a few strategies that win games.</p>
+
+      <section class="card">
+        <h2 style="margin-top:0">The Objective</h2>
+        <p>
+          Two fleets face each other on hidden halves of a 10×10 grid. You cannot see where
+          the enemy ships are, and the enemy cannot see yours. Players take turns firing
+          shots at grid squares. The first player to sink every ship in the opposing fleet
+          wins.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2 style="margin-top:0">The Fleet</h2>
+        <p>Each side commands five ships. Every ship occupies a straight line of squares on the grid:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Ship</th><th scope="col">Size (squares)</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Carrier</td><td>5</td><td>The largest target — and the biggest loss</td></tr>
+              <tr><td>Battleship</td><td>4</td><td>The classic centerpiece of the fleet</td></tr>
+              <tr><td>Cruiser</td><td>3</td><td>Fast, mid-sized warship</td></tr>
+              <tr><td>Submarine</td><td>3</td><td>Same size as the Cruiser</td></tr>
+              <tr><td>Destroyer</td><td>2</td><td>The smallest and hardest-to-find vessel</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Ships may be placed horizontally or vertically, never diagonally, and no two ships
+          may share a square. In our online version both fleets are placed automatically at
+          random at the start of each battle, so you can jump straight into the action.
+        </p>
+      </section>
+
+      <!--
+        AD SLOT #3 (how-to-play page)
+        Paste your AdSense ad unit code here after approval.
+      -->
+
+      <section class="card">
+        <h2 style="margin-top:0">Taking a Turn</h2>
+        <ol>
+          <li><strong>Fire.</strong> On your turn, click any square in the enemy waters that you haven't fired at before.</li>
+          <li><strong>Hear the result.</strong> A red ✕ means <em>hit</em>; a grey circle means <em>miss</em>. When every square of a ship has been hit, it is announced as <em>sunk</em>.</li>
+          <li><strong>Brace for return fire.</strong> The AI admiral immediately fires back at one random square in your waters.</li>
+          <li><strong>Repeat</strong> until one fleet is completely destroyed.</li>
+        </ol>
+        <p>
+          That's the whole game. Unlike the playground version, there's no calling "B7!"
+          across the room and no arguing about whether that was a hit — the game tracks
+          everything for you in the battle log.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2 style="margin-top:0">Strategy Tips From Veteran Admirals</h2>
+
+        <h3>1. Use the parity search</h3>
+        <p>
+          The smallest ship is 2 squares long, which means ships always cover at least one
+          square where row and column are both even (or both odd). If you fire only on those
+          "checkerboard" squares first, you're guaranteed to touch every possible ship
+          position while taking roughly half the shots. Once you've covered the board this
+          way, sweep the remaining squares.
+        </p>
+
+        <h3>2. Switch to hunt mode after a hit</h3>
+        <p>
+          The moment you score a hit, stop searching and start hunting. The rest of that ship
+          lies in the same row or column. Fire at the four neighbours of your hit; once you
+          know the ship's direction, keep firing along that line until it sinks.
+        </p>
+
+        <h3>3. Think about what can still fit</h3>
+        <p>
+          After a few ships have sunk, count the sizes still afloat. Late in the game, only
+          the 2-square Destroyer may remain — so long open stretches of water become the most
+          likely hiding spots, and tight clusters near sunken wrecks can be safely skipped.
+        </p>
+
+        <h3>4. Don't waste shots on sunk ships' borders</h3>
+        <p>
+          Ships can't overlap, so squares adjacent to a fully-sunk ship are guaranteed empty
+          along its length. Cross them off mentally and put your next shot somewhere useful.
+        </p>
+
+        <h3>5. Stay calm against random fire</h3>
+        <p>
+          Our AI fires completely at random, which means its hits come in unpredictable
+          bursts. A lucky early strike doesn't mean the enemy knows where you are — it just
+          got lucky. Stick to your search pattern and the mathematics will usually carry you
+          to victory.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2 style="margin-top:0">Ready to Command?</h2>
+        <p>You now know everything you need. The fleet is waiting.</p>
+        <a class="btn" href="game.html">Play Battleships Now</a>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span class="js-current-year">2026</span> Battleships Online. All rights reserved.</p>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

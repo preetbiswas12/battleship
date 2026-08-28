@@ -1,0 +1,469 @@
+/* =========================================================
+   Battleships Online — shared styles
+   Theme: clean ocean/navy, responsive, AA contrast
+   ========================================================= */
+
+:root {
+  --navy-900: #0b1f33;
+  --navy-800: #10293f;
+  --navy-700: #17334d;
+  --blue-600: #1e6fb8;
+  --blue-500: #2b86d9;
+  --blue-100: #dbeefc;
+  --sand-100: #f4f7fa;
+  --white: #ffffff;
+  --ink: #1c2733;
+  --ink-soft: #4a5a68;
+  --hit: #d64545;
+  --sunk: #8c2f39;
+  --miss: #9fb3c4;
+  --ship: #5b7186;
+  --radius: 10px;
+  --shadow: 0 2px 10px rgba(11, 31, 51, 0.12);
+  --max-width: 1080px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  color: var(--ink);
+  background: var(--sand-100);
+  line-height: 1.6;
+}
+
+img { max-width: 100%; height: auto; }
+
+/* Accessibility helpers */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--white);
+  color: var(--blue-600);
+  padding: 0.75rem 1rem;
+  z-index: 200;
+}
+.skip-link:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+:focus-visible {
+  outline: 3px solid var(--blue-500);
+  outline-offset: 2px;
+}
+
+/* ---------- Header / navigation ---------- */
+
+.site-header {
+  background: var(--navy-900);
+  color: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+.brand svg { width: 28px; height: 28px; }
+
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav a {
+  display: block;
+  color: var(--blue-100);
+  text-decoration: none;
+  padding: 0.5rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.97rem;
+}
+.main-nav a:hover { background: var(--navy-700); color: var(--white); }
+.main-nav a[aria-current="page"] {
+  background: var(--blue-600);
+  color: var(--white);
+}
+
+.nav-toggle {
+  display: none;
+  background: transparent;
+  color: var(--white);
+  border: 2px solid var(--navy-700);
+  border-radius: 6px;
+  padding: 0.4rem 0.7rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+@media (max-width: 780px) {
+  .nav-toggle { display: block; }
+  .main-nav {
+    display: none;
+    width: 100%;
+  }
+  .main-nav.open { display: block; }
+  .main-nav ul {
+    flex-direction: column;
+    padding-bottom: 0.75rem;
+  }
+}
+
+/* ---------- Layout ---------- */
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+main { padding: 2rem 0 3rem; }
+
+.page-title {
+  color: var(--navy-900);
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+}
+
+.page-subtitle {
+  color: var(--ink-soft);
+  font-size: 1.1rem;
+  margin: 0 0 2rem;
+  max-width: 46rem;
+}
+
+.section-title {
+  color: var(--navy-800);
+  font-size: 1.4rem;
+  margin: 2.5rem 0 0.75rem;
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+.card-grid .card { margin-bottom: 0; }
+
+.hero {
+  background: linear-gradient(160deg, var(--navy-900), var(--navy-700));
+  color: var(--white);
+  text-align: center;
+  padding: 3.5rem 0;
+}
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 0 0 0.75rem;
+  line-height: 1.15;
+}
+.hero p {
+  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+  color: var(--blue-100);
+  max-width: 40rem;
+  margin: 0 auto 1.75rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  background: var(--blue-600);
+  color: var(--white);
+  text-decoration: none;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.8rem 1.6rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn:hover { background: var(--blue-500); }
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--blue-600);
+  color: var(--blue-600);
+}
+.btn-secondary:hover { background: var(--blue-100); }
+
+/* Tables (fleet info etc.) */
+.table-wrap { overflow-x: auto; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background: var(--white);
+}
+th, td {
+  text-align: left;
+  padding: 0.65rem 0.9rem;
+  border-bottom: 1px solid #e3eaf0;
+}
+th {
+  background: var(--navy-800);
+  color: var(--white);
+}
+tbody tr:nth-child(even) { background: #f6fafd; }
+
+/* Legal / long-form pages */
+.legal h2 {
+  color: var(--navy-800);
+  font-size: 1.25rem;
+  margin: 2rem 0 0.5rem;
+}
+.legal p, .legal li { max-width: 46rem; }
+.legal ul { padding-left: 1.4rem; }
+.last-updated {
+  color: var(--ink-soft);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+/* Contact form */
+.contact-form label {
+  display: block;
+  font-weight: 600;
+  margin: 1rem 0 0.3rem;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  max-width: 30rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #c3d0da;
+  border-radius: 6px;
+  font: inherit;
+}
+.contact-form textarea { min-height: 140px; resize: vertical; }
+
+.form-hint { color: var(--ink-soft); font-size: 0.92rem; }
+
+/* ---------- Game page ---------- */
+
+.game-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 980px) {
+  .game-layout { grid-template-columns: 2fr 1fr; align-items: start; }
+}
+
+.boards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.board-panel h2 {
+  font-size: 1.05rem;
+  margin: 0 0 0.5rem;
+  color: var(--navy-800);
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  gap: 2px;
+  background: var(--navy-800);
+  padding: 4px;
+  border-radius: var(--radius);
+}
+
+.cell {
+  aspect-ratio: 1 / 1;
+  border: none;
+  padding: 0;
+  background: var(--blue-100);
+  border-radius: 3px;
+  cursor: pointer;
+  min-width: 0;
+  transition: background 0.1s ease;
+}
+
+.grid .label {
+  background: transparent;
+  color: var(--blue-100);
+  font-size: clamp(0.55rem, 1.4vw, 0.75rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.enemy-board:not(.locked) .cell:not([disabled]):hover {
+  background: var(--blue-500);
+}
+
+.cell.ship { background: var(--ship); }
+.cell.hit {
+  background: var(--hit);
+  position: relative;
+}
+.cell.miss { background: var(--miss); }
+.cell.sunk { background: var(--sunk); }
+
+.cell::after {
+  content: "";
+  position: absolute;
+  inset: 25%;
+  border-radius: 50%;
+}
+.cell.miss::after { background: var(--white); opacity: 0.85; }
+.cell.hit::after, .cell.sunk::after {
+  content: "✕";
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-weight: 700;
+  font-size: clamp(0.6rem, 1.6vw, 0.9rem);
+  border-radius: 0;
+}
+
+.enemy-board.locked .cell { cursor: default; }
+.enemy-board.locked { opacity: 0.75; }
+
+.game-status {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem 1.25rem;
+}
+
+#status-message {
+  font-size: 1.15rem;
+  font-weight: 600;
+  min-height: 1.6em;
+  margin: 0 0 0.75rem;
+}
+
+.fleet-status {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.fleet-status li {
+  font-size: 0.82rem;
+  background: var(--blue-100);
+  color: var(--navy-800);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+}
+.fleet-status li.sunk {
+  background: var(--sunk);
+  color: var(--white);
+  text-decoration: line-through;
+}
+
+.log {
+  max-height: 180px;
+  overflow-y: auto;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  border-top: 1px solid #e3eaf0;
+  padding-top: 0.5rem;
+}
+.log p { margin: 0.15rem 0; }
+
+.game-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
+
+.game-over-banner {
+  background: var(--navy-900);
+  color: var(--white);
+  border-radius: var(--radius);
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-bottom: 1.5rem;
+}
+.game-over-banner.win { background: #14663f; }
+.game-over-banner.lose { background: var(--sunk); }
+.game-over-banner p { font-size: 1.2rem; margin: 0 0 1rem; }
+
+[hidden] { display: none !important; }
+
+/* Ad placeholders — remove this block when real ad code is added */
+.ad-slot { margin: 1.5rem 0; text-align: center; }
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  background: var(--navy-900);
+  color: var(--blue-100);
+  padding: 2rem 0;
+  margin-top: 3rem;
+  font-size: 0.92rem;
+}
+.site-footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+.footer-links a { color: var(--blue-100); text-decoration: none; }
+.footer-links a:hover { color: var(--white); text-decoration: underline; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}

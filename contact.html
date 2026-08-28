@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Battleships Online</title>
+  <meta name="description" content="Get in touch with the Battleships Online team. Report a bug, suggest an improvement, ask about advertising, or just say hello — we read every message.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M12 38h40l-6 10H18z" fill="#2b86d9"/><rect x="28" y="20" width="8" height="14" fill="#2b86d9"/><rect x="22" y="26" width="20" height="8" fill="#1e6fb8"/></svg>
+        Battleships Online
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">☰ Menu</button>
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="game.html">Play Game</a></li>
+          <li><a href="how-to-play.html">How to Play</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="container">
+      <h1 class="page-title">Contact Us</h1>
+      <p class="page-subtitle">Found a bug? Have an idea? Want to say hello from the high seas? We'd love to hear from you.</p>
+
+      <div class="card-grid">
+        <section class="card">
+          <h2 style="margin-top:0">Send a Message</h2>
+          <p class="form-hint">
+            This form opens your email app with your message pre-filled — no data is stored
+            on this website. You can also write to us directly at
+            <a href="mailto:quide04@gmail.com"><strong>quide04@gmail.com</strong></a>.
+          </p>
+          <form class="contact-form" id="contact-form" action="mailto:quide04@gmail.com" method="post" enctype="text/plain">
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required>
+
+            <label for="email">Your email address</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+            <p class="form-hint">We only use this to reply to your message. It is never shared.</p>
+
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+
+            <p style="margin-top:1.25rem">
+              <button class="btn" type="submit">Open Email Draft</button>
+            </p>
+          </form>
+        </section>
+
+        <section class="card">
+          <h2 style="margin-top:0">What to Expect</h2>
+          <ul>
+            <li>We usually reply within <strong>2–3 business days</strong>.</li>
+            <li>Bug reports: tell us what browser and device you were using, and what you clicked before the problem appeared.</li>
+            <li>Advertising enquiries: include "Advertising" in the subject line.</li>
+            <li>Privacy questions: see our <a href="privacy-policy.html">Privacy Policy</a>, or mark your message "Privacy".</li>
+          </ul>
+        </section>
+      </div>
+
+      <section aria-labelledby="before-writing">
+        <h2 class="section-title" id="before-writing">Before You Write…</h2>
+        <ul>
+          <li><strong>The AI seems unfair:</strong> the computer fires at completely random squares — sometimes it gets lucky streaks. That's part of the classic game!</li>
+          <li><strong>"I lost immediately":</strong> each new game places fleets randomly, so outcomes vary. Check the <a href="how-to-play.html#strategy">strategy tips</a> to sharpen your aim.</li>
+          <li><strong>A page looks broken:</strong> try refreshing (Ctrl+R / Cmd+R) first — and if it still looks wrong, send us a screenshot if you can.</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span class="js-current-year">2026</span> Battleships Online. All rights reserved.</p>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // mailto fallback: build a readable subject/body so the visitor's email app opens pre-filled.
+    (function () {
+      var form = document.getElementById('contact-form');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var name = document.getElementById('name').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var subject = document.getElementById('subject').value.trim();
+        var message = document.getElementById('message').value.trim();
+        var body =
+          'Name: ' + name + '\n' +
+          'Reply-to email: ' + email + '\n\n' +
+          message;
+        window.location.href =
+          'mailto:quide04@gmail.com' +
+          '?subject=' + encodeURIComponent('[Battleships Online] ' + subject) +
+          '&body=' + encodeURIComponent(body);
+      });
+    })();
+  </script>
+</body>
+</html>
