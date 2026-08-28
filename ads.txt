@@ -4,7 +4,7 @@
 # SETUP: replace pub-0000000000000000 with YOUR publisher ID.
 # Find it in AdSense under: Account -> Settings -> Account information
 # (it looks like "pub-1234567890123456").
-google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+google.com, pub-6449843857507736, DIRECT, f08c47fec0942fa0
 
 # If you later use other ad networks (Ad Manager, Ezoic, etc.), each one
 # gives you its own line to append here. Never list a network you don't use.
